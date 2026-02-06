@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #2c2d5b;
+  --primary-light: #eef1fa;
+  --primary-dark: #2c2d5bda;
+
+  --secondary: #ff0000;
+  --secondary-light: #ff7f7f;
+  --secondary-dark: #990000;
+
+  --neutral-100: #fafafa;
+  --neutral-200: #f0f0f0;
+  --neutral-300: #e0e0e0;
+  --neutral-400: #d0d0d0;
+  --neutral-500: #b0b0b0;
+  --neutral-600: #808080;
+  --neutral-700: #505050;
+  --neutral-800: #303030;
+  --neutral-900: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #4da9ff;
+    --primary-light: #80c2ff;
+    --primary-dark: #003f66;
+
+    --secondary: #ff7f7f;
+    --secondary-light: #ffa3a3;
+    --secondary-dark: #990000;
+
+    --neutral-100: #2b2b2b;
+    --neutral-200: #1f1f1f;
+    --neutral-300: #141414;
+    --neutral-400: #0a0a0a;
+    --neutral-500: #171717;
+    --neutral-600: #262626;
+    --neutral-700: #404040;
+    --neutral-800: #525252;
+    --neutral-900: #737373;
+  }
+}
+
+body {
+  background-color: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--primary-light);
+}
+
+button {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--primary-light);
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+
+    --popover-foreground: 0 0% 3.9%;
+
+    --primary: 0 0% 9%;
+
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 96.1%;
+
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 0 0% 96.1%;
+
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+
+    --input: 0 0% 89.8%;
+
+    --ring: 0 0% 3.9%;
+
+    --chart-1: 12 76% 61%;
+
+    --chart-2: 173 58% 39%;
+
+    --chart-3: 197 37% 24%;
+
+    --chart-4: 43 74% 66%;
+
+    --chart-5: 27 87% 67%;
+
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 3.9%;
+
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 0 0% 14.9%;
+
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+
+    --input: 0 0% 14.9%;
+
+    --ring: 0 0% 83.1%;
+
+    --chart-1: 220 70% 50%;
+
+    --chart-2: 160 60% 45%;
+
+    --chart-3: 30 80% 55%;
+
+    --chart-4: 280 65% 60%;
+
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h2 {
+    position: relative;
+    padding-bottom: 0.5rem;
+  }
+  h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 6rem;
+    height: 4px;
+    background-color: var(--secondary);
+  }
+}
