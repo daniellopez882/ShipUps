@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main, production-readiness]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+      - name: The body font is actually built
+        run: cat .next/static/css/*.css | grep -qi "lato"
+      - run: npm audit --audit-level=high
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: No .env tracked
+        run: test -z "$(git ls-files | grep -E '(^|/)\.env')"
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  container:
+    runs-on: ubuntu-latest
+    needs: [check]
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t shipups:ci .
+      - name: Runs as non-root
+        run: test "$(docker run --rm --entrypoint id shipups:ci -u)" = "10001"
+      - name: Serves the page with security headers
+        run: |
+          docker run -d --rm --name shipups -p 3000:3000 shipups:ci
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:3000/ >/dev/null 2>&1 && break; sleep 1; done
+          curl -fsS http://127.0.0.1:3000/ | grep -q "Warehousing and Logistics"
+          curl -sSI http://127.0.0.1:3000/ | grep -qi '^content-security-policy:'
+          curl -sSI http://127.0.0.1:3000/ | grep -qi '^x-frame-options: DENY'
+          docker stop shipups
