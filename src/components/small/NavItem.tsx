@@ -1,18 +1,18 @@
 import React from "react";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 const NavItem = ({
-  arrow = false,
+  href,
+  onClick,
   children,
 }: {
-  arrow?: boolean;
+  href: string;
+  onClick?: () => void;
   children: React.ReactNode;
 }) => {
   return (
-    <div className="flex items-center gap-1">
+    <a href={href} onClick={onClick} className="flex items-center gap-1 hover:underline">
       {children}
-      {arrow && <ChevronDownIcon className="size-4" />}
-    </div>
+    </a>
   );
 };
 
