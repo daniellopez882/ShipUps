@@ -7,12 +7,14 @@ import ServicesSection from "@/components/sections/ServicesSection";
 
 export default function Home() {
   return (
-    <div className="font-lato">
+    <div id="top">
       <PrimaryBar />
-      <HeroSection />
-      <ServicesSection />
-      <OperationModeSection />
-      <OnsiteSection />
+      <main>
+        <HeroSection />
+        <ServicesSection />
+        <OperationModeSection />
+        <OnsiteSection />
+      </main>
       <Footer />
     </div>
   );

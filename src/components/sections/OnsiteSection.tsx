@@ -1,34 +1,36 @@
 import Image from "next/image";
 import PrimaryButton from "@/components/small/PrimaryButton";
+import SecondaryButton from "@/components/small/SecondaryButton";
 import Subtitle from "@/components/small/Subtitle";
-import { Button } from "@/components/ui/button";
 
 const OnsiteSection = () => {
   return (
-    <div className="flex flex-col gap-16 px-[30px] py-16 bg-primary-light">
-      <Subtitle>
+    <section
+      id="warehouse"
+      aria-labelledby="warehouse-heading"
+      className="flex flex-col gap-16 px-[30px] py-16 bg-primary-light"
+    >
+      <Subtitle id="warehouse-heading">
         <span className="font-bold">Warehouse</span> Onsite
       </Subtitle>
 
-      {/* Map */}
       <div className="flex justify-center">
         <div className="relative w-80 h-52 md:w-[800px] md:h-[420px]">
-          <Image src="/onsite.png" layout="fill" alt="map" />
+          <Image
+            src="/onsite.png"
+            alt="Stylised map of warehouse locations, shown as clusters of dots"
+            fill
+            sizes="(min-width: 768px) 800px, 320px"
+            className="object-contain"
+          />
         </div>
       </div>
 
-      {/* CTA Buttons */}
       <div className="flex flex-col md:flex-row md:justify-center gap-5">
-        <PrimaryButton>Join Now</PrimaryButton>
-        <Button
-          size="lg"
-          variant="outline"
-          className="text-primary px-4 py-2 h-12 w-full md:w-60"
-        >
-          Request Quote
-        </Button>
+        <PrimaryButton href="#quote">Join Now</PrimaryButton>
+        <SecondaryButton href="#quote">Request Quote</SecondaryButton>
       </div>
-    </div>
+    </section>
   );
 };
 

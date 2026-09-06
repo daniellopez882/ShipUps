@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Lato } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// The design's body font. It was declared in tailwind.config.ts as `font-lato`
+// but never loaded: @fontsource/lato was a dependency nothing imported, and the
+// next/font call lived in a Pages-router `_app.js` that the App Router ignores.
+const lato = Lato({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-lato",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "ShipUp",
+  title: "ShipUp — Warehousing and Logistics",
   description:
-    "A modern SaaS platform designed for seamless shipping management. ",
+    "Landing page for ShipUp, a warehousing, freight and packaging service.",
 };
 
 export default function RootLayout({
@@ -25,11 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${lato.variable} font-lato antialiased`}>{children}</body>
     </html>
   );
 }
